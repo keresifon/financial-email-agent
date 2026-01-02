@@ -144,6 +144,17 @@ class ClassificationConfig(BaseModel):
 
 
 
+class MCPConfig(BaseModel):
+    """MCP (Model Context Protocol) configuration."""
+    enabled: bool = Field(default=False, description="Enable MCP architecture")
+    gmail_server_command: str = Field(default="python", description="Command to start Gmail MCP server")
+    gmail_server_args: List[str] = Field(default_factory=lambda: ["-m", "mcp_servers.gmail"], description="Gmail server arguments")
+    database_server_command: str = Field(default="python", description="Command to start Database MCP server")
+    database_server_args: List[str] = Field(default_factory=lambda: ["-m", "mcp_servers.database"], description="Database server arguments")
+    document_server_command: str = Field(default="python", description="Command to start Document MCP server")
+    document_server_args: List[str] = Field(default_factory=lambda: ["-m", "mcp_servers.document"], description="Document server arguments")
+
+
 class AppConfig(BaseModel):
     """Main application configuration."""
     email: EmailConfig = Field(default_factory=EmailConfig, description="Email configuration")
@@ -154,6 +165,7 @@ class AppConfig(BaseModel):
     reporting: ReportingConfig = Field(default_factory=ReportingConfig, description="Reporting configuration")
     security: SecurityConfig = Field(default_factory=SecurityConfig, description="Security configuration")
     classification: ClassificationConfig = Field(default_factory=ClassificationConfig, description="Classification configuration")
+    mcp: MCPConfig = Field(default_factory=MCPConfig, description="MCP configuration")
     environment: Environment = Field(default=Environment.DEVELOPMENT, description="Application environment")
     debug: bool = Field(default=False, description="Debug mode")
 
