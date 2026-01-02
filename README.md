@@ -18,14 +18,19 @@ An autonomous AI agent that monitors Gmail inbox, identifies financial emails, e
 
 ## 🏗️ Architecture
 
+**Current Implementation:** Monolithic architecture with direct service integration
+
 The system consists of several key components:
 
 - **Email Monitor Service**: Connects to Gmail API and fetches new emails
 - **Email Classifier**: Uses Llama models to identify financial emails
 - **Data Extraction Engine**: Specialized extractors for different document types
+- **Attachment Processor**: Extracts text from PDFs and images (OCR)
 - **MongoDB Database**: Stores emails and extracted financial data
 - **Scheduler**: Automates the email checking process
 - **Configuration Manager**: Centralized configuration management
+
+**Note:** MCP (Model Context Protocol) server implementations are available in `mcp_servers/` directory for future modular architecture. See [docs/implementation-plan.md](docs/implementation-plan.md) for MCP integration roadmap.
 
 For detailed architecture information, see [docs/architecture.md](docs/architecture.md).
 

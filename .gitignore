@@ -51,6 +51,7 @@ venv.bak/
 # Credentials and Secrets
 credentials.json
 token.json
+token.pickle
 *.pem
 *.key
 secrets/
