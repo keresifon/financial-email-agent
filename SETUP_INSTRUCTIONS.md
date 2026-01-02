@@ -105,7 +105,7 @@ mongod --dbpath /usr/local/var/mongodb  # Mac
 5. Get connection string
 6. Update in `.env`:
    ```
-   MONGODB_CONNECTION_STRING=mongodb+srv://username:password@cluster.mongodb.net/
+   MONGODB_CONNECTION_STRING=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/
    ```
 
 ### Step 3: Install Ollama
