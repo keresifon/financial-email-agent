@@ -1,0 +1,86 @@
+# Financial Email Agent Configuration (MCP Mode)
+
+email:
+  provider: gmail
+  oauth2:
+    credentials_file: credentials.json
+    token_file: token.json
+  monitoring:
+    interval_minutes: 15
+    max_emails_per_check: 50
+  filters:
+    unread_only: true
+    labels: ["Finance", "Invoices"]
+
+llama:
+  model: llama3.1:8b
+  api_url: http://localhost:11434
+  temperature: 0.1
+  max_tokens: 2048
+  timeout_seconds: 60
+
+mongodb:
+  connection_string: mongodb://localhost:27017
+  database: financial_data
+  collections:
+    emails: emails
+    invoices: invoices
+    receipts: receipts
+    bank_statements: bank_statements
+    expense_reports: expense_reports
+
+logging:
+  level: INFO
+  file: logs/agent.log
+  max_size_mb: 100
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+scheduler:
+  enabled: true
+  check_interval_minutes: 15
+  retry_failed: true
+  max_retries: 3
+  retry_delay_seconds: 300
+
+reporting:
+  enabled: true
+  daily_summary: true
+  email_alerts: false
+
+security:
+  mask_sensitive_data: true
+  encrypt_tokens: true
+  data_retention_days: 365
+
+classification:
+  min_confidence: 0.7
+  categories:
+    - invoice
+    - receipt
+    - statement
+    - tax_document
+    - contract
+    - payment_confirmation
+    - other
+
+# MCP (Model Context Protocol) Configuration
+mcp:
+  enabled: true
+  gmail_server_command: python
+  gmail_server_args:
+    - "-m"
+    - "mcp_servers.gmail"
+  database_server_command: python
+  database_server_args:
+    - "-m"
+    - "mcp_servers.database"
+  document_server_command: python
+  document_server_args:
+    - "-m"
+    - "mcp_servers.document"
+
+environment: development
+debug: false
+
+# Made with Bob
